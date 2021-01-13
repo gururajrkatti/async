@@ -17,6 +17,10 @@ matrix:
       env: BROWSER=false MAKE_TEST=false
      
     # Power jobs
+    - node_js: "12"
+      addons:
+        firefox: "60.0"
+      env: BROWSER=true MAKE_TEST=true
     - node_js: "10"
       env: BROWSER=false MAKE_TEST=false
       arch: ppc64le
