@@ -1,9 +1,6 @@
 sudo: false
 dist: xenial
 language: node_js
-node_js:
-  - "10"
-  - "12"
 
 services:
   - xvfb
@@ -14,6 +11,18 @@ matrix:
       addons:
         firefox: "60.0"
       env: BROWSER=true MAKE_TEST=true
+    - node_js: "10"
+      env: BROWSER=false MAKE_TEST=false
+    - node_js: "12"
+      env: BROWSER=false MAKE_TEST=false
+     
+    # Power jobs
+    - node_js: "10"
+      env: BROWSER=false MAKE_TEST=false
+      arch: ppc64le
+    - node_js: "12"
+      env: BROWSER=false MAKE_TEST=false
+      arch: ppc64le
 env:
   matrix: BROWSER=false MAKE_TEST=false
 
