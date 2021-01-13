@@ -7,27 +7,25 @@ services:
 
 matrix:
   include:
-    - node_js: "12"
-      addons:
-        firefox: "60.0"
-      env: BROWSER=true MAKE_TEST=true
-    - node_js: "10"
-      env: BROWSER=false MAKE_TEST=false
-    - node_js: "12"
-      env: BROWSER=false MAKE_TEST=false
+    #- node_js: "12"
+    #  addons:
+    #    firefox: "60.0"
+    #  env: BROWSER=true MAKE_TEST=true
+    #- node_js: "10"
+    #  env: BROWSER=false MAKE_TEST=false
+    #- node_js: "12"
+    #  env: BROWSER=false MAKE_TEST=false
      
     # Power jobs
     - node_js: "12"
-      addons:
-        firefox: "60.0"
       env: BROWSER=true MAKE_TEST=true
       arch: ppc64le
-    - node_js: "10"
-      env: BROWSER=false MAKE_TEST=false
-      arch: ppc64le
-    - node_js: "12"
-      env: BROWSER=false MAKE_TEST=false
-      arch: ppc64le
+    #- node_js: "10"
+    #  env: BROWSER=false MAKE_TEST=false
+    #  arch: ppc64le
+    #- node_js: "12"
+    #  env: BROWSER=false MAKE_TEST=false
+    #  arch: ppc64le
 env:
   matrix: BROWSER=false MAKE_TEST=false
 
@@ -39,6 +37,13 @@ after_success: npm run coveralls
 before_script:
   - sudo apt-get install -y make
   - make --version
+  - |
+    if [ "$TRAVIS_CPU_ARCH" = "ppc64le" ]; then
+      sudo apt-get install -y firefox;
+      sudo apt-get install -y xvfb;
+      sudo Xvfb :99 & ;
+      export DISPLAY=:99 ;
+    fi
 
 script:
   - "[ $BROWSER == true ] || npm test"
