@@ -21,6 +21,7 @@ matrix:
       addons:
         firefox: "60.0"
       env: BROWSER=true MAKE_TEST=true
+      arch: ppc64le
     - node_js: "10"
       env: BROWSER=false MAKE_TEST=false
       arch: ppc64le
