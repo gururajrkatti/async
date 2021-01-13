@@ -41,7 +41,7 @@ before_script:
     if [ "$TRAVIS_CPU_ARCH" = "ppc64le" ]; then
       sudo apt-get install -y firefox;
       sudo apt-get install -y xvfb;
-      sudo Xvfb :99 & ;
+      sudo Xvfb :99& 
       export DISPLAY=:99 ;
     fi
 
